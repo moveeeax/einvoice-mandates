@@ -1,0 +1,16 @@
+# Compiled binaries and release output
+/bin/
+/dist/
+einvoice-mandates
+
+# Go build and test artefacts
+*.test
+*.out
+coverage.*
+vendor/
+
+# Editors and OS noise
+.idea/
+.vscode/
+*.swp
+.DS_Store
