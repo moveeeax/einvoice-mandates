@@ -1,0 +1,940 @@
+{
+  "schema_version": 1,
+  "release": "2026.07",
+  "generated_on": "2026-07-25T00:00:00Z",
+  "counts": {
+    "countries": 8,
+    "mandates": 15,
+    "phases": 40,
+    "sources": 18,
+    "draft_countries": 8
+  },
+  "countries": [
+    {
+      "schema_version": 1,
+      "country": "DE",
+      "country_name": "Germany",
+      "region": "EU",
+      "tax_authority": "Bundesministerium der Finanzen",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-erechnung",
+          "title": "Domestic B2B e-invoicing obligation (Wachstumschancengesetz, \u00a7 14 UStG)",
+          "scope": "b2b",
+          "model": "interoperability",
+          "status": "in_force",
+          "formats": [
+            "XRechnung",
+            "ZUGFeRD 2.x / Factur-X",
+            "EN 16931 CII",
+            "EN 16931 UBL"
+          ],
+          "phases": [
+            {
+              "id": "receipt-all",
+              "starts_on": "2025-01-01",
+              "obligation": "receive",
+              "applies_to": "All domestic businesses must be able to receive an EN 16931 compliant invoice",
+              "status": "in_force",
+              "source_ref": "bmf-erechnung"
+            },
+            {
+              "id": "issue-large",
+              "starts_on": "2027-01-01",
+              "obligation": "issue",
+              "applies_to": "Businesses above the prior-year turnover threshold must issue structured invoices",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "gt",
+                "value": 800000,
+                "currency": "EUR",
+                "period": "prior_calendar_year"
+              },
+              "status": "planned",
+              "source_ref": "bmf-erechnung"
+            },
+            {
+              "id": "issue-all",
+              "starts_on": "2028-01-01",
+              "obligation": "issue",
+              "applies_to": "All remaining domestic businesses, with no turnover floor",
+              "status": "planned",
+              "source_ref": "bmf-erechnung"
+            }
+          ],
+          "penalty": "No dedicated penalty regime; the risk is the ordinary denial of input VAT deduction where an invoice does not meet the formal requirements.",
+          "sources": [
+            {
+              "id": "bmf-erechnung",
+              "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Umsatzsteuer/2024-10-15-einfuehrung-e-rechnung.html",
+              "title": "Einf\u00fchrung der obligatorischen elektronischen Rechnung im B2B-Bereich (BMF-Schreiben)",
+              "publisher": "Bundesministerium der Finanzen",
+              "language": "de",
+              "verified_on": "2026-07-25",
+              "official": true
+            },
+            {
+              "id": "eu-derogation",
+              "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023D1551",
+              "title": "Council Implementing Decision (EU) 2023/1551 authorising mandatory e-invoicing in Germany",
+              "publisher": "EUR-Lex",
+              "language": "en",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        },
+        {
+          "id": "b2g-xrechnung",
+          "title": "B2G e-invoicing to federal contracting authorities",
+          "scope": "b2g",
+          "model": "interoperability",
+          "status": "in_force",
+          "network": "Peppol / ZRE / OZG-RE",
+          "formats": [
+            "XRechnung",
+            "Peppol BIS Billing 3.0"
+          ],
+          "phases": [
+            {
+              "id": "federal-receipt",
+              "starts_on": "2018-11-27",
+              "obligation": "receive",
+              "applies_to": "Federal contracting authorities must be able to receive electronic invoices",
+              "status": "in_force"
+            },
+            {
+              "id": "supplier-issue",
+              "starts_on": "2020-11-27",
+              "obligation": "issue",
+              "applies_to": "Suppliers invoicing federal contracting authorities, above the de-minimis value",
+              "status": "in_force"
+            }
+          ],
+          "sources": [
+            {
+              "id": "erechnung-bund",
+              "url": "https://www.e-rechnung-bund.de/",
+              "title": "E-Rechnung an die Bundesverwaltung",
+              "publisher": "Bundesministerium des Innern",
+              "language": "de",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry. Germany has no central clearance platform: the domestic B2B obligation is an EN 16931 format obligation over any agreed transport, which is why the model is interoperability rather than clearance."
+    },
+    {
+      "schema_version": 1,
+      "country": "ES",
+      "country_name": "Spain",
+      "region": "EU",
+      "tax_authority": "Agencia Estatal de Administraci\u00f3n Tributaria (AEAT)",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-crea-y-crece",
+          "title": "Domestic B2B e-invoicing obligation (Ley 18/2022, Crea y Crece)",
+          "scope": "b2b",
+          "model": "interoperability",
+          "status": "enacted",
+          "formats": [
+            "Facturae",
+            "UBL",
+            "CII",
+            "EDIFACT"
+          ],
+          "phases": [
+            {
+              "id": "issue-large",
+              "starts_on_rule": "Twelve months after the implementing regulation is published in the BOE",
+              "obligation": "issue",
+              "applies_to": "Businesses and professionals above the annual turnover threshold",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "gt",
+                "value": 8000000,
+                "currency": "EUR",
+                "period": "prior_calendar_year"
+              },
+              "status": "awaiting_trigger",
+              "source_ref": "boe-18-2022"
+            },
+            {
+              "id": "issue-all",
+              "starts_on_rule": "Twenty-four months after the implementing regulation is published in the BOE",
+              "obligation": "issue",
+              "applies_to": "All remaining businesses and self-employed professionals",
+              "status": "awaiting_trigger",
+              "source_ref": "boe-18-2022"
+            }
+          ],
+          "sources": [
+            {
+              "id": "boe-18-2022",
+              "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-15818",
+              "title": "Ley 18/2022 de creaci\u00f3n y crecimiento de empresas",
+              "publisher": "Bolet\u00edn Oficial del Estado",
+              "language": "es",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        },
+        {
+          "id": "b2g-face",
+          "title": "B2G e-invoicing via FACe",
+          "scope": "b2g",
+          "model": "centralised-exchange",
+          "status": "in_force",
+          "network": "FACe",
+          "formats": [
+            "Facturae 3.2.x"
+          ],
+          "phases": [
+            {
+              "id": "suppliers-above-threshold",
+              "starts_on": "2015-01-15",
+              "obligation": "issue",
+              "applies_to": "Companies and other non-exempt entities invoicing the public sector; administrations may exclude invoices below the de-minimis amount",
+              "threshold": {
+                "metric": "invoice_amount",
+                "operator": "gt",
+                "value": 5000,
+                "currency": "EUR",
+                "period": "per_invoice"
+              },
+              "status": "in_force"
+            }
+          ],
+          "sources": [
+            {
+              "id": "face",
+              "url": "https://face.gob.es/",
+              "title": "FACe \u2014 Punto General de Entrada de Facturas Electr\u00f3nicas",
+              "publisher": "Ministerio para la Transformaci\u00f3n Digital y de la Funci\u00f3n P\u00fablica",
+              "language": "es",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        },
+        {
+          "id": "verifactu",
+          "title": "Verifactu \u2014 certified billing software and record submission (RD 1007/2023)",
+          "scope": "b2b",
+          "model": "real-time-reporting",
+          "status": "in_force",
+          "formats": [
+            "Verifactu billing records"
+          ],
+          "phases": [
+            {
+              "id": "corporate-income-taxpayers",
+              "starts_on": "2026-01-01",
+              "obligation": "report",
+              "applies_to": "Taxpayers subject to corporate income tax using billing software",
+              "status": "in_force"
+            },
+            {
+              "id": "other-taxpayers",
+              "starts_on": "2026-07-01",
+              "obligation": "report",
+              "applies_to": "All other obliged taxpayers using billing software",
+              "status": "in_force"
+            }
+          ],
+          "penalty": "RD 1007/2023 and the General Tax Law provide for fixed penalties per financial year for producing or marketing non-compliant billing software.",
+          "sources": [
+            {
+              "id": "aeat-verifactu",
+              "url": "https://sede.agenciatributaria.gob.es/Sede/iva/sistemas-informaticos-facturacion-verifactu.html",
+              "title": "Sistemas inform\u00e1ticos de facturaci\u00f3n y Verifactu",
+              "publisher": "Agencia Tributaria",
+              "language": "es",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry. Spain runs two unrelated tracks that vendors routinely conflate: the B2B e-invoicing obligation of Ley 18/2022 (Crea y Crece), whose start is still pegged to the publication of its implementing regulation, and the Verifactu billing-software regime of RD 1007/2023. Modelled separately."
+    },
+    {
+      "schema_version": 1,
+      "country": "FR",
+      "country_name": "France",
+      "region": "EU",
+      "tax_authority": "Direction g\u00e9n\u00e9rale des Finances publiques (DGFiP)",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-facture-electronique",
+          "title": "Domestic B2B e-invoicing via certified partner platforms (PDP)",
+          "scope": "b2b",
+          "model": "interoperability",
+          "status": "enacted",
+          "network": "PDP network with a central directory",
+          "formats": [
+            "Factur-X",
+            "UBL 2.1",
+            "UN/CEFACT CII"
+          ],
+          "phases": [
+            {
+              "id": "receipt-all",
+              "starts_on": "2026-09-01",
+              "obligation": "receive",
+              "applies_to": "All established VAT-registered businesses must be able to receive",
+              "status": "planned",
+              "previous_starts_on": "2024-07-01",
+              "source_ref": "dgfip-fe"
+            },
+            {
+              "id": "issue-large-and-eti",
+              "starts_on": "2026-09-01",
+              "obligation": "issue",
+              "applies_to": "Large enterprises and intermediate-sized enterprises (ETI)",
+              "status": "planned",
+              "previous_starts_on": "2024-07-01",
+              "source_ref": "dgfip-fe"
+            },
+            {
+              "id": "issue-sme-micro",
+              "starts_on": "2027-09-01",
+              "obligation": "issue",
+              "applies_to": "Small and medium enterprises and micro-enterprises",
+              "status": "planned",
+              "previous_starts_on": "2026-01-01",
+              "source_ref": "dgfip-fe"
+            }
+          ],
+          "sources": [
+            {
+              "id": "dgfip-fe",
+              "url": "https://www.impots.gouv.fr/facturation-electronique",
+              "title": "La facturation \u00e9lectronique entre entreprises",
+              "publisher": "DGFiP",
+              "language": "fr",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        },
+        {
+          "id": "b2g-chorus",
+          "title": "B2G e-invoicing via Chorus Pro",
+          "scope": "b2g",
+          "model": "centralised-exchange",
+          "status": "in_force",
+          "network": "Chorus Pro",
+          "formats": [
+            "Factur-X",
+            "UBL",
+            "CII"
+          ],
+          "phases": [
+            {
+              "id": "large-suppliers",
+              "starts_on": "2017-01-01",
+              "obligation": "issue",
+              "applies_to": "Large suppliers to the public sector",
+              "status": "in_force"
+            },
+            {
+              "id": "micro-suppliers",
+              "starts_on": "2020-01-01",
+              "obligation": "issue",
+              "applies_to": "All remaining suppliers to the public sector, including micro-enterprises",
+              "status": "in_force"
+            }
+          ],
+          "sources": [
+            {
+              "id": "chorus",
+              "url": "https://communaute.chorus-pro.gouv.fr/",
+              "title": "Communaut\u00e9 Chorus Pro",
+              "publisher": "Agence pour l'informatique financi\u00e8re de l'\u00c9tat",
+              "language": "fr",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        },
+        {
+          "id": "e-reporting",
+          "title": "E-reporting of B2C and cross-border transaction data",
+          "scope": "e-reporting",
+          "model": "real-time-reporting",
+          "status": "enacted",
+          "formats": [
+            "Structured transaction data submission"
+          ],
+          "phases": [
+            {
+              "id": "reporting-large-and-eti",
+              "starts_on": "2026-09-01",
+              "obligation": "report",
+              "applies_to": "Large enterprises and intermediate-sized enterprises (ETI)",
+              "status": "planned",
+              "previous_starts_on": "2024-07-01"
+            },
+            {
+              "id": "reporting-sme-micro",
+              "starts_on": "2027-09-01",
+              "obligation": "report",
+              "applies_to": "Small and medium enterprises and micro-enterprises",
+              "status": "planned",
+              "previous_starts_on": "2026-01-01"
+            }
+          ],
+          "sources": [
+            {
+              "id": "dgfip-fe",
+              "url": "https://www.impots.gouv.fr/facturation-electronique",
+              "title": "La facturation \u00e9lectronique entre entreprises",
+              "publisher": "DGFiP",
+              "language": "fr",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry. France runs a Y model: invoices flow between certified partner platforms (PDP), while a separate e-reporting stream covers B2C and cross-border transactions. The 2024 timetable was replaced by the current one in the 2024 finance act, recorded as previous_starts_on."
+    },
+    {
+      "schema_version": 1,
+      "country": "IT",
+      "country_name": "Italy",
+      "region": "EU",
+      "tax_authority": "Agenzia delle Entrate",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-sdi",
+          "title": "FatturaPA B2B and B2C clearance via Sistema di Interscambio",
+          "scope": "b2b",
+          "model": "clearance",
+          "status": "in_force",
+          "network": "SdI",
+          "formats": [
+            "FatturaPA"
+          ],
+          "phases": [
+            {
+              "id": "general",
+              "starts_on": "2019-01-01",
+              "obligation": "issue",
+              "applies_to": "All VAT-registered established taxpayers, except those in the flat-rate regimes",
+              "status": "in_force",
+              "source_ref": "ade-fe"
+            },
+            {
+              "id": "forfettari-over-25k",
+              "starts_on": "2022-07-01",
+              "obligation": "issue",
+              "applies_to": "Flat-rate (forfettario) and minimum-regime taxpayers above the revenue threshold",
+              "threshold": {
+                "metric": "annual_revenue",
+                "operator": "gt",
+                "value": 25000,
+                "currency": "EUR",
+                "period": "prior_calendar_year"
+              },
+              "status": "in_force"
+            },
+            {
+              "id": "forfettari-all",
+              "starts_on": "2024-01-01",
+              "obligation": "issue",
+              "applies_to": "All remaining flat-rate and minimum-regime taxpayers, with no revenue floor",
+              "status": "in_force"
+            }
+          ],
+          "penalty": "Sanctions for omitted or late electronic invoicing follow art. 6 of D.Lgs. 471/1997; the amount depends on whether the VAT settlement is affected. Check the current text before quoting figures.",
+          "sources": [
+            {
+              "id": "ade-fe",
+              "url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/fatturazione-elettronica",
+              "title": "Fatturazione elettronica e corrispettivi telematici",
+              "publisher": "Agenzia delle Entrate",
+              "language": "it",
+              "verified_on": "2026-07-25",
+              "official": true
+            },
+            {
+              "id": "eu-derogation",
+              "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32018D0593",
+              "title": "Council Implementing Decision (EU) 2018/593 authorising mandatory e-invoicing in Italy",
+              "publisher": "EUR-Lex",
+              "language": "en",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        },
+        {
+          "id": "b2g-sdi",
+          "title": "FatturaPA B2G clearance via Sistema di Interscambio",
+          "scope": "b2g",
+          "model": "clearance",
+          "status": "in_force",
+          "network": "SdI",
+          "formats": [
+            "FatturaPA"
+          ],
+          "phases": [
+            {
+              "id": "central-government",
+              "starts_on": "2014-06-06",
+              "obligation": "issue",
+              "applies_to": "Suppliers invoicing ministries, tax agencies and social security bodies",
+              "status": "in_force"
+            },
+            {
+              "id": "all-public-administrations",
+              "starts_on": "2015-03-31",
+              "obligation": "issue",
+              "applies_to": "Suppliers invoicing any other public administration",
+              "status": "in_force"
+            }
+          ],
+          "penalty": "Public administrations may not settle an invoice that was not delivered through SdI; the invoice is treated as never issued.",
+          "sources": [
+            {
+              "id": "ade-fe",
+              "url": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/fatturazione-elettronica",
+              "title": "Fatturazione elettronica e corrispettivi telematici",
+              "publisher": "Agenzia delle Entrate",
+              "language": "it",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry. Compiled from the cited official pages and not yet re-checked line by line, hence review_status: draft."
+    },
+    {
+      "schema_version": 1,
+      "country": "MX",
+      "country_name": "Mexico",
+      "region": "LATAM",
+      "tax_authority": "Servicio de Administraci\u00f3n Tributaria (SAT)",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-cfdi",
+          "title": "CFDI clearance through authorised certification providers (PAC)",
+          "scope": "b2b",
+          "model": "clearance",
+          "status": "in_force",
+          "network": "PAC network",
+          "formats": [
+            "CFDI 4.0 XML"
+          ],
+          "phases": [
+            {
+              "id": "all-taxpayers",
+              "starts_on": "2014-01-01",
+              "obligation": "issue",
+              "applies_to": "All taxpayers, completing the phase-in that began in 2011",
+              "status": "in_force"
+            },
+            {
+              "id": "cfdi-33",
+              "starts_on": "2018-01-01",
+              "obligation": "issue",
+              "applies_to": "All taxpayers must issue in CFDI version 3.3",
+              "status": "in_force"
+            },
+            {
+              "id": "cfdi-40",
+              "starts_on": "2023-04-01",
+              "obligation": "issue",
+              "applies_to": "All taxpayers must issue in CFDI version 4.0, ending the 3.3 coexistence period",
+              "status": "in_force",
+              "previous_starts_on": "2023-01-01",
+              "source_ref": "sat-factura"
+            }
+          ],
+          "penalty": "An expense without a valid stamped CFDI is not deductible, and the Federal Fiscal Code provides for fines for failure to issue one.",
+          "sources": [
+            {
+              "id": "sat-factura",
+              "url": "https://www.sat.gob.mx/consultas/factura-electronica",
+              "title": "Factura electr\u00f3nica (CFDI)",
+              "publisher": "Servicio de Administraci\u00f3n Tributaria",
+              "language": "es",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        },
+        {
+          "id": "payroll-nomina",
+          "title": "CFDI de N\u00f3mina \u2014 payroll receipts as stamped CFDI",
+          "scope": "b2c",
+          "model": "clearance",
+          "status": "in_force",
+          "network": "PAC network",
+          "formats": [
+            "CFDI 4.0 with N\u00f3mina 1.2 complement"
+          ],
+          "phases": [
+            {
+              "id": "nomina-12",
+              "starts_on": "2017-04-01",
+              "obligation": "issue",
+              "applies_to": "All employers must stamp payroll receipts with the N\u00f3mina 1.2 complement",
+              "status": "in_force"
+            }
+          ],
+          "sources": [
+            {
+              "id": "sat-nomina",
+              "url": "https://www.sat.gob.mx/consultas/74303/complemento-de-nomina",
+              "title": "Complemento de n\u00f3mina",
+              "publisher": "Servicio de Administraci\u00f3n Tributaria",
+              "language": "es",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry. Mexico is the oldest full clearance regime in the dataset: invoices are stamped by an authorised certification provider (PAC) before they are valid. Version migrations, not new populations, are what move here."
+    },
+    {
+      "schema_version": 1,
+      "country": "MY",
+      "country_name": "Malaysia",
+      "region": "APAC",
+      "tax_authority": "Lembaga Hasil Dalam Negeri Malaysia (IRBM / LHDN)",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-myinvois",
+          "title": "MyInvois e-invoicing with IRBM validation",
+          "scope": "b2b",
+          "model": "clearance",
+          "status": "in_force",
+          "network": "MyInvois portal / API",
+          "formats": [
+            "UBL 2.1 XML",
+            "UBL 2.1 JSON"
+          ],
+          "phases": [
+            {
+              "id": "band-over-100m",
+              "starts_on": "2024-08-01",
+              "obligation": "issue",
+              "applies_to": "Taxpayers with annual turnover or revenue above the first band",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "gt",
+                "value": 100000000,
+                "currency": "MYR",
+                "period": "financial_year_2022"
+              },
+              "status": "in_force",
+              "source_ref": "irbm-einvoice"
+            },
+            {
+              "id": "band-25m-100m",
+              "starts_on": "2025-01-01",
+              "obligation": "issue",
+              "applies_to": "Taxpayers in the second turnover band",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "between",
+                "value": 25000000,
+                "value_max": 100000000,
+                "currency": "MYR",
+                "period": "financial_year_2022"
+              },
+              "status": "in_force",
+              "source_ref": "irbm-einvoice"
+            },
+            {
+              "id": "band-5m-25m",
+              "starts_on": "2025-07-01",
+              "obligation": "issue",
+              "applies_to": "Taxpayers in the third turnover band",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "between",
+                "value": 5000000,
+                "value_max": 25000000,
+                "currency": "MYR",
+                "period": "financial_year_2022"
+              },
+              "status": "in_force",
+              "source_ref": "irbm-einvoice"
+            },
+            {
+              "id": "band-1m-5m",
+              "starts_on": "2026-07-01",
+              "obligation": "issue",
+              "applies_to": "Taxpayers in the fourth turnover band",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "between",
+                "value": 1000000,
+                "value_max": 5000000,
+                "currency": "MYR",
+                "period": "financial_year_2022"
+              },
+              "status": "in_force",
+              "previous_starts_on": "2026-01-01",
+              "source_ref": "irbm-einvoice"
+            },
+            {
+              "id": "band-500k-1m",
+              "starts_on": "2027-01-01",
+              "obligation": "issue",
+              "applies_to": "Taxpayers in the smallest in-scope band; those below the lower bound are exempt from the obligation altogether",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "between",
+                "value": 500000,
+                "value_max": 1000000,
+                "currency": "MYR",
+                "period": "financial_year_2022"
+              },
+              "status": "planned",
+              "previous_starts_on": "2026-07-01",
+              "source_ref": "irbm-einvoice"
+            }
+          ],
+          "penalty": "Section 120 of the Income Tax Act 1967 provides for a fine per non-compliant invoice, subject to the relaxation period granted at the start of each phase.",
+          "sources": [
+            {
+              "id": "irbm-einvoice",
+              "url": "https://www.hasil.gov.my/en/e-invoice/",
+              "title": "e-Invoice",
+              "publisher": "Lembaga Hasil Dalam Negeri Malaysia",
+              "language": "en",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry. The MyInvois roll-out has been re-cut more than once: the lower turnover bands were pushed back and the smallest taxpayers were exempted entirely. Each moved band carries previous_starts_on so the slip is visible."
+    },
+    {
+      "schema_version": 1,
+      "country": "PL",
+      "country_name": "Poland",
+      "region": "EU",
+      "tax_authority": "Ministerstwo Finans\u00f3w / Krajowa Administracja Skarbowa",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-ksef",
+          "title": "KSeF \u2014 Krajowy System e-Faktur mandatory structured invoicing",
+          "scope": "b2b",
+          "model": "clearance",
+          "status": "in_force",
+          "network": "KSeF",
+          "formats": [
+            "FA(2)",
+            "FA(3)"
+          ],
+          "phases": [
+            {
+              "id": "large-taxpayers",
+              "starts_on": "2026-02-01",
+              "obligation": "issue",
+              "applies_to": "Taxpayers whose 2024 sales value including tax exceeded the large-taxpayer threshold",
+              "threshold": {
+                "metric": "annual_turnover",
+                "operator": "gt",
+                "value": 200000000,
+                "currency": "PLN",
+                "period": "calendar_year_2024"
+              },
+              "status": "in_force",
+              "previous_starts_on": "2024-07-01",
+              "source_ref": "mf-ksef"
+            },
+            {
+              "id": "all-other-taxpayers",
+              "starts_on": "2026-04-01",
+              "obligation": "issue",
+              "applies_to": "All remaining taxpayers, including those exempt from VAT",
+              "status": "in_force",
+              "previous_starts_on": "2024-07-01",
+              "source_ref": "mf-ksef"
+            },
+            {
+              "id": "digitally-excluded",
+              "starts_on": "2027-01-01",
+              "obligation": "issue",
+              "applies_to": "Smallest taxpayers issuing low-value invoices, allowed a transitional period before structured issuing becomes compulsory",
+              "threshold": {
+                "metric": "monthly_sales",
+                "operator": "lte",
+                "value": 10000,
+                "currency": "PLN",
+                "period": "calendar_month"
+              },
+              "status": "planned",
+              "source_ref": "mf-ksef"
+            }
+          ],
+          "penalty": "The VAT Act provides for a penalty of up to 100% of the VAT shown on an invoice issued outside KSeF, with a transitional grace period at the start of the obligation. Verify the current wording before quoting.",
+          "sources": [
+            {
+              "id": "mf-ksef",
+              "url": "https://www.podatki.gov.pl/ksef/",
+              "title": "Krajowy System e-Faktur (KSeF)",
+              "publisher": "Ministerstwo Finans\u00f3w",
+              "language": "pl",
+              "verified_on": "2026-07-25",
+              "official": true
+            },
+            {
+              "id": "eu-derogation",
+              "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022D1003",
+              "title": "Council Implementing Decision (EU) 2022/1003 authorising mandatory e-invoicing in Poland",
+              "publisher": "EUR-Lex",
+              "language": "en",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry. KSeF was voluntary from 2022-01-01; only the mandatory phases are modelled here. The original 2024-07-01 start was withdrawn in January 2024 after an audit of the platform, which is recorded as previous_starts_on."
+    },
+    {
+      "schema_version": 1,
+      "country": "SA",
+      "country_name": "Saudi Arabia",
+      "region": "MEA",
+      "tax_authority": "Zakat, Tax and Customs Authority (ZATCA)",
+      "review_status": "draft",
+      "last_reviewed": "2026-07-25",
+      "mandates": [
+        {
+          "id": "b2b-fatoora",
+          "title": "FATOORA electronic invoicing (Phase 1 generation, Phase 2 integration)",
+          "scope": "b2b",
+          "model": "clearance",
+          "status": "in_force",
+          "network": "FATOORA portal",
+          "formats": [
+            "ZATCA XML (UBL 2.1)",
+            "PDF/A-3 with embedded XML"
+          ],
+          "phases": [
+            {
+              "id": "phase1-generation",
+              "starts_on": "2021-12-04",
+              "obligation": "issue",
+              "applies_to": "All VAT-registered resident taxpayers must generate compliant electronic invoices",
+              "status": "in_force",
+              "source_ref": "zatca-einvoicing"
+            },
+            {
+              "id": "phase2-wave1",
+              "starts_on": "2023-01-01",
+              "obligation": "report",
+              "applies_to": "Wave 1 \u2014 taxpayers above the first revenue threshold must integrate with FATOORA",
+              "threshold": {
+                "metric": "annual_revenue",
+                "operator": "gt",
+                "value": 3000000000,
+                "currency": "SAR",
+                "period": "calendar_year_2021"
+              },
+              "status": "in_force"
+            },
+            {
+              "id": "phase2-wave2",
+              "starts_on": "2023-07-01",
+              "obligation": "report",
+              "applies_to": "Wave 2 \u2014 taxpayers above the second revenue threshold",
+              "threshold": {
+                "metric": "annual_revenue",
+                "operator": "gt",
+                "value": 500000000,
+                "currency": "SAR",
+                "period": "calendar_year_2021"
+              },
+              "status": "in_force"
+            },
+            {
+              "id": "phase2-wave3",
+              "starts_on": "2023-10-01",
+              "obligation": "report",
+              "applies_to": "Wave 3 \u2014 taxpayers above the third revenue threshold",
+              "threshold": {
+                "metric": "annual_revenue",
+                "operator": "gt",
+                "value": 250000000,
+                "currency": "SAR",
+                "period": "calendar_year_2021"
+              },
+              "status": "in_force"
+            },
+            {
+              "id": "phase2-wave4",
+              "starts_on": "2023-11-01",
+              "obligation": "report",
+              "applies_to": "Wave 4 \u2014 taxpayers above the fourth revenue threshold",
+              "threshold": {
+                "metric": "annual_revenue",
+                "operator": "gt",
+                "value": 150000000,
+                "currency": "SAR",
+                "period": "calendar_year_2021"
+              },
+              "status": "in_force"
+            },
+            {
+              "id": "phase2-wave5",
+              "starts_on": "2023-12-01",
+              "obligation": "report",
+              "applies_to": "Wave 5 \u2014 taxpayers above the fifth revenue threshold",
+              "threshold": {
+                "metric": "annual_revenue",
+                "operator": "gt",
+                "value": 100000000,
+                "currency": "SAR",
+                "period": "calendar_year_2021"
+              },
+              "status": "in_force"
+            }
+          ],
+          "penalty": "Fines under the VAT and e-invoicing regulations escalate by violation type and repetition, starting at a warning for a first breach.",
+          "sources": [
+            {
+              "id": "zatca-einvoicing",
+              "url": "https://zatca.gov.sa/en/E-Invoicing/Pages/default.aspx",
+              "title": "E-Invoicing (FATOORA)",
+              "publisher": "Zakat, Tax and Customs Authority",
+              "language": "en",
+              "verified_on": "2026-07-25",
+              "official": true
+            }
+          ]
+        }
+      ],
+      "notes": "Seed entry, deliberately incomplete. ZATCA announces Phase 2 integration waves on a rolling basis roughly six months ahead, each wave lowering the revenue threshold. Only the waves confirmed at the time of writing are entered; the remaining waves must be added before this file leaves draft."
+    }
+  ]
+}
