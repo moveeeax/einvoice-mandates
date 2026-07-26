@@ -1,7 +1,8 @@
 # Compiled binaries and release output
+# Anchored: an unanchored name would also match cmd/einvoice-mandates/
 /bin/
 /dist/
-einvoice-mandates
+/einvoice-mandates
 
 # Go build and test artefacts
 *.test
