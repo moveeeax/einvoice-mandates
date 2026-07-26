@@ -1,0 +1,59 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      - name: Check formatting
+        run: |
+          unformatted="$(gofmt -l .)"
+          if [ -n "$unformatted" ]; then
+            echo "These files need gofmt:"
+            echo "$unformatted"
+            exit 1
+          fi
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test
+        run: go test -race ./...
+
+      - name: Build
+        run: go build -o bin/einvoice-mandates ./cmd/einvoice-mandates
+
+      # The dataset is the product, so a warning in it fails the build too:
+      # a citation older than the freshness promise is a defect.
+      - name: Lint the dataset
+        run: ./bin/einvoice-mandates validate -strict
+
+      - name: Cut a release artefact and the static page
+        run: |
+          mkdir -p dist
+          ./bin/einvoice-mandates build -release "ci-${GITHUB_SHA::7}" -allow-draft -o dist/release.json
+          ./bin/einvoice-mandates render dist/release.json -o dist/index.html
+
+      - name: Diff the build against the last published example
+        run: ./bin/einvoice-mandates diff examples/release-2026.07.json dist/release.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-artefact
+          path: dist/
+          retention-days: 14
