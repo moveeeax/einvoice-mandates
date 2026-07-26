@@ -1,0 +1,59 @@
+# Every field in this file is wrong on purpose. See validate_test.go for the
+# exact set of findings each defect is expected to produce.
+schema_version: 1
+country: yy
+country_name: Brokenland
+region: MIDDLE-EARTH
+tax_authority: ""
+review_status: probably-fine
+last_reviewed: 2030-01-01
+
+mandates:
+  - id: Bad_ID
+    title: ""
+    scope: b2x
+    model: telepathy
+    status: in_force
+    formats: []
+    sources:
+      - id: not-official
+        url: http://insecure.example.com/page
+        title: Some blog post
+        publisher: A Blog
+        language: eng
+        verified_on: 2019-01-01
+        official: false
+    phases:
+      - id: later
+        starts_on: 2030-01-01
+        obligation: issue
+        applies_to: Big companies
+        status: in_force
+        threshold:
+          metric: annual_turnover
+          operator: approximately
+          value: -5
+          value_max: 3
+          currency: euro
+      - id: earlier
+        starts_on: 2020-01-01
+        obligation: teleport
+        applies_to: ""
+        status: awaiting_trigger
+      - id: no-date-no-rule
+        obligation: issue
+        applies_to: Someone
+        status: planned
+      - id: both-date-and-rule
+        starts_on: 2026-01-01
+        starts_on_rule: Whenever the minister feels like it
+        obligation: issue
+        applies_to: Someone else
+        status: planned
+        source_ref: nonexistent-source
+      - id: later
+        starts_on: 2031-01-01
+        previous_starts_on: 2032-01-01
+        obligation: issue
+        applies_to: Duplicate phase id
+        status: planned

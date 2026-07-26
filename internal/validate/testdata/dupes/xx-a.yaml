@@ -1,0 +1,64 @@
+schema_version: 1
+country: XX
+country_name: Examplestan
+region: EU
+tax_authority: Example Revenue Service
+review_status: verified
+last_reviewed: 2026-06-01
+
+mandates:
+  - id: b2b-clearance
+    title: Example B2B clearance mandate
+    scope: b2b
+    model: clearance
+    status: in_force
+    network: ExNet
+    formats: [UBL 2.1]
+    penalty: A fixed fine per invoice issued outside ExNet.
+    sources:
+      - id: authority
+        url: https://tax.example.gov/e-invoicing
+        title: E-invoicing obligation
+        publisher: Example Revenue Service
+        language: en
+        verified_on: 2026-06-01
+        official: true
+    phases:
+      - id: large
+        starts_on: 2025-01-01
+        obligation: issue
+        applies_to: Taxpayers above the turnover threshold
+        threshold:
+          metric: annual_turnover
+          operator: gt
+          value: 10000000
+          currency: EUR
+          period: prior_calendar_year
+        status: in_force
+        source_ref: authority
+      - id: everyone-else
+        starts_on: 2027-01-01
+        obligation: issue
+        applies_to: All remaining taxpayers
+        status: planned
+
+  - id: b2b-awaiting
+    title: Example mandate awaiting its implementing regulation
+    scope: b2b
+    model: interoperability
+    status: enacted
+    formats: [UBL 2.1]
+    sources:
+      - id: statute
+        url: https://law.example.gov/act-2026-01
+        title: E-invoicing Act 2026
+        publisher: Example Gazette
+        language: en
+        verified_on: 2026-06-01
+        official: true
+    phases:
+      - id: stage-one
+        starts_on_rule: Twelve months after the implementing regulation is published
+        obligation: issue
+        applies_to: Taxpayers above the turnover threshold
+        status: awaiting_trigger
