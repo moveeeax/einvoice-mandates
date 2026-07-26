@@ -1,0 +1,74 @@
+schema_version: 1
+country: PL
+country_name: Poland
+region: EU
+tax_authority: Ministerstwo Finansów / Krajowa Administracja Skarbowa
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry. KSeF was voluntary from 2022-01-01; only the mandatory phases are
+  modelled here. The original 2024-07-01 start was withdrawn in January 2024
+  after an audit of the platform, which is recorded as previous_starts_on.
+
+mandates:
+  - id: b2b-ksef
+    title: KSeF — Krajowy System e-Faktur mandatory structured invoicing
+    scope: b2b
+    model: clearance
+    status: in_force
+    network: KSeF
+    formats: [FA(2), FA(3)]
+    penalty: >-
+      The VAT Act provides for a penalty of up to 100% of the VAT shown on an
+      invoice issued outside KSeF, with a transitional grace period at the
+      start of the obligation. Verify the current wording before quoting.
+    sources:
+      - id: mf-ksef
+        url: https://www.podatki.gov.pl/ksef/
+        title: Krajowy System e-Faktur (KSeF)
+        publisher: Ministerstwo Finansów
+        language: pl
+        verified_on: 2026-07-25
+        official: true
+      - id: eu-derogation
+        url: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022D1003
+        title: Council Implementing Decision (EU) 2022/1003 authorising mandatory e-invoicing in Poland
+        publisher: EUR-Lex
+        language: en
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: large-taxpayers
+        starts_on: 2026-02-01
+        previous_starts_on: 2024-07-01
+        obligation: issue
+        applies_to: Taxpayers whose 2024 sales value including tax exceeded the large-taxpayer threshold
+        threshold:
+          metric: annual_turnover
+          operator: gt
+          value: 200000000
+          currency: PLN
+          period: calendar_year_2024
+        status: in_force
+        source_ref: mf-ksef
+      - id: all-other-taxpayers
+        starts_on: 2026-04-01
+        previous_starts_on: 2024-07-01
+        obligation: issue
+        applies_to: All remaining taxpayers, including those exempt from VAT
+        status: in_force
+        source_ref: mf-ksef
+      - id: digitally-excluded
+        starts_on: 2027-01-01
+        obligation: issue
+        applies_to: >-
+          Smallest taxpayers issuing low-value invoices, allowed a transitional
+          period before structured issuing becomes compulsory
+        threshold:
+          metric: monthly_sales
+          operator: lte
+          value: 10000
+          currency: PLN
+          period: calendar_month
+        status: planned
+        source_ref: mf-ksef

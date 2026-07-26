@@ -1,0 +1,106 @@
+schema_version: 1
+country: FR
+country_name: France
+region: EU
+tax_authority: Direction générale des Finances publiques (DGFiP)
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry. France runs a Y model: invoices flow between certified partner
+  platforms (PDP), while a separate e-reporting stream covers B2C and
+  cross-border transactions. The 2024 timetable was replaced by the current one
+  in the 2024 finance act, recorded as previous_starts_on.
+
+mandates:
+  - id: b2g-chorus
+    title: B2G e-invoicing via Chorus Pro
+    scope: b2g
+    model: centralised-exchange
+    status: in_force
+    network: Chorus Pro
+    formats: [Factur-X, UBL, CII]
+    sources:
+      - id: chorus
+        url: https://communaute.chorus-pro.gouv.fr/
+        title: Communauté Chorus Pro
+        publisher: Agence pour l'informatique financière de l'État
+        language: fr
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: large-suppliers
+        starts_on: 2017-01-01
+        obligation: issue
+        applies_to: Large suppliers to the public sector
+        status: in_force
+      - id: micro-suppliers
+        starts_on: 2020-01-01
+        obligation: issue
+        applies_to: All remaining suppliers to the public sector, including micro-enterprises
+        status: in_force
+
+  - id: b2b-facture-electronique
+    title: Domestic B2B e-invoicing via certified partner platforms (PDP)
+    scope: b2b
+    model: interoperability
+    status: enacted
+    network: PDP network with a central directory
+    formats: [Factur-X, UBL 2.1, UN/CEFACT CII]
+    sources:
+      - id: dgfip-fe
+        url: https://www.impots.gouv.fr/facturation-electronique
+        title: La facturation électronique entre entreprises
+        publisher: DGFiP
+        language: fr
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: receipt-all
+        starts_on: 2026-09-01
+        previous_starts_on: 2024-07-01
+        obligation: receive
+        applies_to: All established VAT-registered businesses must be able to receive
+        status: planned
+        source_ref: dgfip-fe
+      - id: issue-large-and-eti
+        starts_on: 2026-09-01
+        previous_starts_on: 2024-07-01
+        obligation: issue
+        applies_to: Large enterprises and intermediate-sized enterprises (ETI)
+        status: planned
+        source_ref: dgfip-fe
+      - id: issue-sme-micro
+        starts_on: 2027-09-01
+        previous_starts_on: 2026-01-01
+        obligation: issue
+        applies_to: Small and medium enterprises and micro-enterprises
+        status: planned
+        source_ref: dgfip-fe
+
+  - id: e-reporting
+    title: E-reporting of B2C and cross-border transaction data
+    scope: e-reporting
+    model: real-time-reporting
+    status: enacted
+    formats: [Structured transaction data submission]
+    sources:
+      - id: dgfip-fe
+        url: https://www.impots.gouv.fr/facturation-electronique
+        title: La facturation électronique entre entreprises
+        publisher: DGFiP
+        language: fr
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: reporting-large-and-eti
+        starts_on: 2026-09-01
+        previous_starts_on: 2024-07-01
+        obligation: report
+        applies_to: Large enterprises and intermediate-sized enterprises (ETI)
+        status: planned
+      - id: reporting-sme-micro
+        starts_on: 2027-09-01
+        previous_starts_on: 2026-01-01
+        obligation: report
+        applies_to: Small and medium enterprises and micro-enterprises
+        status: planned

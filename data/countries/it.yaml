@@ -1,0 +1,91 @@
+schema_version: 1
+country: IT
+country_name: Italy
+region: EU
+tax_authority: Agenzia delle Entrate
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry. Compiled from the cited official pages and not yet re-checked
+  line by line, hence review_status: draft.
+
+mandates:
+  - id: b2g-sdi
+    title: FatturaPA B2G clearance via Sistema di Interscambio
+    scope: b2g
+    model: clearance
+    status: in_force
+    network: SdI
+    formats: [FatturaPA]
+    penalty: >-
+      Public administrations may not settle an invoice that was not delivered
+      through SdI; the invoice is treated as never issued.
+    sources:
+      - id: ade-fe
+        url: https://www.agenziaentrate.gov.it/portale/aree-tematiche/fatturazione-elettronica
+        title: Fatturazione elettronica e corrispettivi telematici
+        publisher: Agenzia delle Entrate
+        language: it
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: central-government
+        starts_on: 2014-06-06
+        obligation: issue
+        applies_to: Suppliers invoicing ministries, tax agencies and social security bodies
+        status: in_force
+      - id: all-public-administrations
+        starts_on: 2015-03-31
+        obligation: issue
+        applies_to: Suppliers invoicing any other public administration
+        status: in_force
+
+  - id: b2b-sdi
+    title: FatturaPA B2B and B2C clearance via Sistema di Interscambio
+    scope: b2b
+    model: clearance
+    status: in_force
+    network: SdI
+    formats: [FatturaPA]
+    penalty: >-
+      Sanctions for omitted or late electronic invoicing follow art. 6 of
+      D.Lgs. 471/1997; the amount depends on whether the VAT settlement is
+      affected. Check the current text before quoting figures.
+    sources:
+      - id: ade-fe
+        url: https://www.agenziaentrate.gov.it/portale/aree-tematiche/fatturazione-elettronica
+        title: Fatturazione elettronica e corrispettivi telematici
+        publisher: Agenzia delle Entrate
+        language: it
+        verified_on: 2026-07-25
+        official: true
+      - id: eu-derogation
+        url: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32018D0593
+        title: Council Implementing Decision (EU) 2018/593 authorising mandatory e-invoicing in Italy
+        publisher: EUR-Lex
+        language: en
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: general
+        starts_on: 2019-01-01
+        obligation: issue
+        applies_to: All VAT-registered established taxpayers, except those in the flat-rate regimes
+        status: in_force
+        source_ref: ade-fe
+      - id: forfettari-over-25k
+        starts_on: 2022-07-01
+        obligation: issue
+        applies_to: Flat-rate (forfettario) and minimum-regime taxpayers above the revenue threshold
+        threshold:
+          metric: annual_revenue
+          operator: gt
+          value: 25000
+          currency: EUR
+          period: prior_calendar_year
+        status: in_force
+      - id: forfettari-all
+        starts_on: 2024-01-01
+        obligation: issue
+        applies_to: All remaining flat-rate and minimum-regime taxpayers, with no revenue floor
+        status: in_force

@@ -1,0 +1,94 @@
+schema_version: 1
+country: SA
+country_name: Saudi Arabia
+region: MEA
+tax_authority: Zakat, Tax and Customs Authority (ZATCA)
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry, deliberately incomplete. ZATCA announces Phase 2 integration
+  waves on a rolling basis roughly six months ahead, each wave lowering the
+  revenue threshold. Only the waves confirmed at the time of writing are
+  entered; the remaining waves must be added before this file leaves draft.
+
+mandates:
+  - id: b2b-fatoora
+    title: FATOORA electronic invoicing (Phase 1 generation, Phase 2 integration)
+    scope: b2b
+    model: clearance
+    status: in_force
+    network: FATOORA portal
+    formats: [ZATCA XML (UBL 2.1), PDF/A-3 with embedded XML]
+    penalty: >-
+      Fines under the VAT and e-invoicing regulations escalate by violation
+      type and repetition, starting at a warning for a first breach.
+    sources:
+      - id: zatca-einvoicing
+        url: https://zatca.gov.sa/en/E-Invoicing/Pages/default.aspx
+        title: E-Invoicing (FATOORA)
+        publisher: Zakat, Tax and Customs Authority
+        language: en
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: phase1-generation
+        starts_on: 2021-12-04
+        obligation: issue
+        applies_to: All VAT-registered resident taxpayers must generate compliant electronic invoices
+        status: in_force
+        source_ref: zatca-einvoicing
+      - id: phase2-wave1
+        starts_on: 2023-01-01
+        obligation: report
+        applies_to: Wave 1 — taxpayers above the first revenue threshold must integrate with FATOORA
+        threshold:
+          metric: annual_revenue
+          operator: gt
+          value: 3000000000
+          currency: SAR
+          period: calendar_year_2021
+        status: in_force
+      - id: phase2-wave2
+        starts_on: 2023-07-01
+        obligation: report
+        applies_to: Wave 2 — taxpayers above the second revenue threshold
+        threshold:
+          metric: annual_revenue
+          operator: gt
+          value: 500000000
+          currency: SAR
+          period: calendar_year_2021
+        status: in_force
+      - id: phase2-wave3
+        starts_on: 2023-10-01
+        obligation: report
+        applies_to: Wave 3 — taxpayers above the third revenue threshold
+        threshold:
+          metric: annual_revenue
+          operator: gt
+          value: 250000000
+          currency: SAR
+          period: calendar_year_2021
+        status: in_force
+      - id: phase2-wave4
+        starts_on: 2023-11-01
+        obligation: report
+        applies_to: Wave 4 — taxpayers above the fourth revenue threshold
+        threshold:
+          metric: annual_revenue
+          operator: gt
+          value: 150000000
+          currency: SAR
+          period: calendar_year_2021
+        status: in_force
+      - id: phase2-wave5
+        starts_on: 2023-12-01
+        obligation: report
+        applies_to: Wave 5 — taxpayers above the fifth revenue threshold
+        threshold:
+          metric: annual_revenue
+          operator: gt
+          value: 100000000
+          currency: SAR
+          period: calendar_year_2021
+        status: in_force

@@ -1,0 +1,71 @@
+schema_version: 1
+country: MX
+country_name: Mexico
+region: LATAM
+tax_authority: Servicio de Administración Tributaria (SAT)
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry. Mexico is the oldest full clearance regime in the dataset:
+  invoices are stamped by an authorised certification provider (PAC) before
+  they are valid. Version migrations, not new populations, are what move here.
+
+mandates:
+  - id: b2b-cfdi
+    title: CFDI clearance through authorised certification providers (PAC)
+    scope: b2b
+    model: clearance
+    status: in_force
+    network: PAC network
+    formats: [CFDI 4.0 XML]
+    penalty: >-
+      An expense without a valid stamped CFDI is not deductible, and the
+      Federal Fiscal Code provides for fines for failure to issue one.
+    sources:
+      - id: sat-factura
+        url: https://www.sat.gob.mx/consultas/factura-electronica
+        title: Factura electrónica (CFDI)
+        publisher: Servicio de Administración Tributaria
+        language: es
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: all-taxpayers
+        starts_on: 2014-01-01
+        obligation: issue
+        applies_to: All taxpayers, completing the phase-in that began in 2011
+        status: in_force
+      - id: cfdi-33
+        starts_on: 2018-01-01
+        obligation: issue
+        applies_to: All taxpayers must issue in CFDI version 3.3
+        status: in_force
+      - id: cfdi-40
+        starts_on: 2023-04-01
+        previous_starts_on: 2023-01-01
+        obligation: issue
+        applies_to: All taxpayers must issue in CFDI version 4.0, ending the 3.3 coexistence period
+        status: in_force
+        source_ref: sat-factura
+
+  - id: payroll-nomina
+    title: CFDI de Nómina — payroll receipts as stamped CFDI
+    scope: b2c
+    model: clearance
+    status: in_force
+    network: PAC network
+    formats: [CFDI 4.0 with Nómina 1.2 complement]
+    sources:
+      - id: sat-nomina
+        url: https://www.sat.gob.mx/consultas/74303/complemento-de-nomina
+        title: Complemento de nómina
+        publisher: Servicio de Administración Tributaria
+        language: es
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: nomina-12
+        starts_on: 2017-04-01
+        obligation: issue
+        applies_to: All employers must stamp payroll receipts with the Nómina 1.2 complement
+        status: in_force

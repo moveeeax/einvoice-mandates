@@ -1,0 +1,89 @@
+schema_version: 1
+country: DE
+country_name: Germany
+region: EU
+tax_authority: Bundesministerium der Finanzen
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry. Germany has no central clearance platform: the domestic B2B
+  obligation is an EN 16931 format obligation over any agreed transport, which
+  is why the model is interoperability rather than clearance.
+
+mandates:
+  - id: b2g-xrechnung
+    title: B2G e-invoicing to federal contracting authorities
+    scope: b2g
+    model: interoperability
+    status: in_force
+    network: Peppol / ZRE / OZG-RE
+    formats: [XRechnung, Peppol BIS Billing 3.0]
+    sources:
+      - id: erechnung-bund
+        url: https://www.e-rechnung-bund.de/
+        title: E-Rechnung an die Bundesverwaltung
+        publisher: Bundesministerium des Innern
+        language: de
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: federal-receipt
+        starts_on: 2018-11-27
+        obligation: receive
+        applies_to: Federal contracting authorities must be able to receive electronic invoices
+        status: in_force
+      - id: supplier-issue
+        starts_on: 2020-11-27
+        obligation: issue
+        applies_to: Suppliers invoicing federal contracting authorities, above the de-minimis value
+        status: in_force
+
+  - id: b2b-erechnung
+    title: Domestic B2B e-invoicing obligation (Wachstumschancengesetz, § 14 UStG)
+    scope: b2b
+    model: interoperability
+    status: in_force
+    formats: [XRechnung, ZUGFeRD 2.x / Factur-X, EN 16931 CII, EN 16931 UBL]
+    penalty: >-
+      No dedicated penalty regime; the risk is the ordinary denial of input VAT
+      deduction where an invoice does not meet the formal requirements.
+    sources:
+      - id: bmf-erechnung
+        url: https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Umsatzsteuer/2024-10-15-einfuehrung-e-rechnung.html
+        title: Einführung der obligatorischen elektronischen Rechnung im B2B-Bereich (BMF-Schreiben)
+        publisher: Bundesministerium der Finanzen
+        language: de
+        verified_on: 2026-07-25
+        official: true
+      - id: eu-derogation
+        url: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023D1551
+        title: Council Implementing Decision (EU) 2023/1551 authorising mandatory e-invoicing in Germany
+        publisher: EUR-Lex
+        language: en
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: receipt-all
+        starts_on: 2025-01-01
+        obligation: receive
+        applies_to: All domestic businesses must be able to receive an EN 16931 compliant invoice
+        status: in_force
+        source_ref: bmf-erechnung
+      - id: issue-large
+        starts_on: 2027-01-01
+        obligation: issue
+        applies_to: Businesses above the prior-year turnover threshold must issue structured invoices
+        threshold:
+          metric: annual_turnover
+          operator: gt
+          value: 800000
+          currency: EUR
+          period: prior_calendar_year
+        status: planned
+        source_ref: bmf-erechnung
+      - id: issue-all
+        starts_on: 2028-01-01
+        obligation: issue
+        applies_to: All remaining domestic businesses, with no turnover floor
+        status: planned
+        source_ref: bmf-erechnung

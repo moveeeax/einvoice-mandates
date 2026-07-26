@@ -1,0 +1,108 @@
+schema_version: 1
+country: ES
+country_name: Spain
+region: EU
+tax_authority: Agencia Estatal de Administración Tributaria (AEAT)
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry. Spain runs two unrelated tracks that vendors routinely conflate:
+  the B2B e-invoicing obligation of Ley 18/2022 (Crea y Crece), whose start is
+  still pegged to the publication of its implementing regulation, and the
+  Verifactu billing-software regime of RD 1007/2023. Modelled separately.
+
+mandates:
+  - id: b2g-face
+    title: B2G e-invoicing via FACe
+    scope: b2g
+    model: centralised-exchange
+    status: in_force
+    network: FACe
+    formats: [Facturae 3.2.x]
+    sources:
+      - id: face
+        url: https://face.gob.es/
+        title: FACe — Punto General de Entrada de Facturas Electrónicas
+        publisher: Ministerio para la Transformación Digital y de la Función Pública
+        language: es
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: suppliers-above-threshold
+        starts_on: 2015-01-15
+        obligation: issue
+        applies_to: >-
+          Companies and other non-exempt entities invoicing the public sector;
+          administrations may exclude invoices below the de-minimis amount
+        threshold:
+          metric: invoice_amount
+          operator: gt
+          value: 5000
+          currency: EUR
+          period: per_invoice
+        status: in_force
+
+  - id: b2b-crea-y-crece
+    title: Domestic B2B e-invoicing obligation (Ley 18/2022, Crea y Crece)
+    scope: b2b
+    model: interoperability
+    status: enacted
+    formats: [Facturae, UBL, CII, EDIFACT]
+    sources:
+      - id: boe-18-2022
+        url: https://www.boe.es/buscar/act.php?id=BOE-A-2022-15818
+        title: Ley 18/2022 de creación y crecimiento de empresas
+        publisher: Boletín Oficial del Estado
+        language: es
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: issue-large
+        starts_on_rule: >-
+          Twelve months after the implementing regulation is published in the BOE
+        obligation: issue
+        applies_to: Businesses and professionals above the annual turnover threshold
+        threshold:
+          metric: annual_turnover
+          operator: gt
+          value: 8000000
+          currency: EUR
+          period: prior_calendar_year
+        status: awaiting_trigger
+        source_ref: boe-18-2022
+      - id: issue-all
+        starts_on_rule: >-
+          Twenty-four months after the implementing regulation is published in the BOE
+        obligation: issue
+        applies_to: All remaining businesses and self-employed professionals
+        status: awaiting_trigger
+        source_ref: boe-18-2022
+
+  - id: verifactu
+    title: Verifactu — certified billing software and record submission (RD 1007/2023)
+    scope: b2b
+    model: real-time-reporting
+    status: in_force
+    formats: [Verifactu billing records]
+    penalty: >-
+      RD 1007/2023 and the General Tax Law provide for fixed penalties per
+      financial year for producing or marketing non-compliant billing software.
+    sources:
+      - id: aeat-verifactu
+        url: https://sede.agenciatributaria.gob.es/Sede/iva/sistemas-informaticos-facturacion-verifactu.html
+        title: Sistemas informáticos de facturación y Verifactu
+        publisher: Agencia Tributaria
+        language: es
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: corporate-income-taxpayers
+        starts_on: 2026-01-01
+        obligation: report
+        applies_to: Taxpayers subject to corporate income tax using billing software
+        status: in_force
+      - id: other-taxpayers
+        starts_on: 2026-07-01
+        obligation: report
+        applies_to: All other obliged taxpayers using billing software
+        status: in_force

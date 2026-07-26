@@ -1,0 +1,101 @@
+schema_version: 1
+country: MY
+country_name: Malaysia
+region: APAC
+tax_authority: Lembaga Hasil Dalam Negeri Malaysia (IRBM / LHDN)
+review_status: draft
+last_reviewed: 2026-07-25
+notes: >-
+  Seed entry. The MyInvois roll-out has been re-cut more than once: the lower
+  turnover bands were pushed back and the smallest taxpayers were exempted
+  entirely. Each moved band carries previous_starts_on so the slip is visible.
+
+mandates:
+  - id: b2b-myinvois
+    title: MyInvois e-invoicing with IRBM validation
+    scope: b2b
+    model: clearance
+    status: in_force
+    network: MyInvois portal / API
+    formats: [UBL 2.1 XML, UBL 2.1 JSON]
+    penalty: >-
+      Section 120 of the Income Tax Act 1967 provides for a fine per
+      non-compliant invoice, subject to the relaxation period granted at the
+      start of each phase.
+    sources:
+      - id: irbm-einvoice
+        url: https://www.hasil.gov.my/en/e-invoice/
+        title: e-Invoice
+        publisher: Lembaga Hasil Dalam Negeri Malaysia
+        language: en
+        verified_on: 2026-07-25
+        official: true
+    phases:
+      - id: band-over-100m
+        starts_on: 2024-08-01
+        obligation: issue
+        applies_to: Taxpayers with annual turnover or revenue above the first band
+        threshold:
+          metric: annual_turnover
+          operator: gt
+          value: 100000000
+          currency: MYR
+          period: financial_year_2022
+        status: in_force
+        source_ref: irbm-einvoice
+      - id: band-25m-100m
+        starts_on: 2025-01-01
+        obligation: issue
+        applies_to: Taxpayers in the second turnover band
+        threshold:
+          metric: annual_turnover
+          operator: between
+          value: 25000000
+          value_max: 100000000
+          currency: MYR
+          period: financial_year_2022
+        status: in_force
+        source_ref: irbm-einvoice
+      - id: band-5m-25m
+        starts_on: 2025-07-01
+        obligation: issue
+        applies_to: Taxpayers in the third turnover band
+        threshold:
+          metric: annual_turnover
+          operator: between
+          value: 5000000
+          value_max: 25000000
+          currency: MYR
+          period: financial_year_2022
+        status: in_force
+        source_ref: irbm-einvoice
+      - id: band-1m-5m
+        starts_on: 2026-07-01
+        previous_starts_on: 2026-01-01
+        obligation: issue
+        applies_to: Taxpayers in the fourth turnover band
+        threshold:
+          metric: annual_turnover
+          operator: between
+          value: 1000000
+          value_max: 5000000
+          currency: MYR
+          period: financial_year_2022
+        status: in_force
+        source_ref: irbm-einvoice
+      - id: band-500k-1m
+        starts_on: 2027-01-01
+        previous_starts_on: 2026-07-01
+        obligation: issue
+        applies_to: >-
+          Taxpayers in the smallest in-scope band; those below the lower bound
+          are exempt from the obligation altogether
+        threshold:
+          metric: annual_turnover
+          operator: between
+          value: 500000
+          value_max: 1000000
+          currency: MYR
+          period: financial_year_2022
+        status: planned
+        source_ref: irbm-einvoice
