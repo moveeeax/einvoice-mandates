@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "release": "2026.07",
-  "generated_on": "2026-07-25T00:00:00Z",
+  "generated_on": "2026-11-04T06:36:50Z",
   "counts": {
     "countries": 8,
     "mandates": 15,
     "phases": 40,
-    "sources": 18,
+    "sources": 21,
     "draft_countries": 8
   },
   "countries": [
@@ -21,7 +21,7 @@
       "mandates": [
         {
           "id": "b2b-erechnung",
-          "title": "Domestic B2B e-invoicing obligation (Wachstumschancengesetz, \u00a7 14 UStG)",
+          "title": "Domestic B2B e-invoicing obligation (Wachstumschancengesetz, § 14 UStG)",
           "scope": "b2b",
           "model": "interoperability",
           "status": "in_force",
@@ -69,7 +69,7 @@
             {
               "id": "bmf-erechnung",
               "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Umsatzsteuer/2024-10-15-einfuehrung-e-rechnung.html",
-              "title": "Einf\u00fchrung der obligatorischen elektronischen Rechnung im B2B-Bereich (BMF-Schreiben)",
+              "title": "Einführung der obligatorischen elektronischen Rechnung im B2B-Bereich (BMF-Schreiben)",
               "publisher": "Bundesministerium der Finanzen",
               "language": "de",
               "verified_on": "2026-07-25",
@@ -133,7 +133,7 @@
       "country": "ES",
       "country_name": "Spain",
       "region": "EU",
-      "tax_authority": "Agencia Estatal de Administraci\u00f3n Tributaria (AEAT)",
+      "tax_authority": "Agencia Estatal de Administración Tributaria (AEAT)",
       "review_status": "draft",
       "last_reviewed": "2026-07-25",
       "mandates": [
@@ -178,8 +178,8 @@
             {
               "id": "boe-18-2022",
               "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-15818",
-              "title": "Ley 18/2022 de creaci\u00f3n y crecimiento de empresas",
-              "publisher": "Bolet\u00edn Oficial del Estado",
+              "title": "Ley 18/2022 de creación y crecimiento de empresas",
+              "publisher": "Boletín Oficial del Estado",
               "language": "es",
               "verified_on": "2026-07-25",
               "official": true
@@ -216,8 +216,8 @@
             {
               "id": "face",
               "url": "https://face.gob.es/",
-              "title": "FACe \u2014 Punto General de Entrada de Facturas Electr\u00f3nicas",
-              "publisher": "Ministerio para la Transformaci\u00f3n Digital y de la Funci\u00f3n P\u00fablica",
+              "title": "FACe — Punto General de Entrada de Facturas Electrónicas",
+              "publisher": "Ministerio para la Transformación Digital y de la Función Pública",
               "language": "es",
               "verified_on": "2026-07-25",
               "official": true
@@ -226,7 +226,7 @@
         },
         {
           "id": "verifactu",
-          "title": "Verifactu \u2014 certified billing software and record submission (RD 1007/2023)",
+          "title": "Verifactu — certified billing software and record submission (RD 1007/2023)",
           "scope": "b2b",
           "model": "real-time-reporting",
           "status": "in_force",
@@ -254,7 +254,7 @@
             {
               "id": "aeat-verifactu",
               "url": "https://sede.agenciatributaria.gob.es/Sede/iva/sistemas-informaticos-facturacion-verifactu.html",
-              "title": "Sistemas inform\u00e1ticos de facturaci\u00f3n y Verifactu",
+              "title": "Sistemas informáticos de facturación y Verifactu",
               "publisher": "Agencia Tributaria",
               "language": "es",
               "verified_on": "2026-07-25",
@@ -270,16 +270,16 @@
       "country": "FR",
       "country_name": "France",
       "region": "EU",
-      "tax_authority": "Direction g\u00e9n\u00e9rale des Finances publiques (DGFiP)",
+      "tax_authority": "Direction générale des Finances publiques (DGFiP)",
       "review_status": "draft",
-      "last_reviewed": "2026-07-25",
+      "last_reviewed": "2026-11-04",
       "mandates": [
         {
           "id": "b2b-facture-electronique",
           "title": "Domestic B2B e-invoicing via certified partner platforms (PDP)",
           "scope": "b2b",
           "model": "interoperability",
-          "status": "enacted",
+          "status": "in_force",
           "network": "PDP network with a central directory",
           "formats": [
             "Factur-X",
@@ -292,18 +292,18 @@
               "starts_on": "2026-09-01",
               "obligation": "receive",
               "applies_to": "All established VAT-registered businesses must be able to receive",
-              "status": "planned",
+              "status": "in_force",
               "previous_starts_on": "2024-07-01",
-              "source_ref": "dgfip-fe"
+              "source_ref": "dgfip-actu"
             },
             {
               "id": "issue-large-and-eti",
               "starts_on": "2026-09-01",
               "obligation": "issue",
               "applies_to": "Large enterprises and intermediate-sized enterprises (ETI)",
-              "status": "planned",
+              "status": "in_force",
               "previous_starts_on": "2024-07-01",
-              "source_ref": "dgfip-fe"
+              "source_ref": "dgfip-actu"
             },
             {
               "id": "issue-sme-micro",
@@ -318,11 +318,29 @@
           "sources": [
             {
               "id": "dgfip-fe",
-              "url": "https://www.impots.gouv.fr/facturation-electronique",
-              "title": "La facturation \u00e9lectronique entre entreprises",
+              "url": "https://www.impots.gouv.fr/professionnel/je-decouvre-la-facturation-electronique",
+              "title": "Je découvre la facturation électronique",
               "publisher": "DGFiP",
               "language": "fr",
-              "verified_on": "2026-07-25",
+              "verified_on": "2026-11-04",
+              "official": true
+            },
+            {
+              "id": "dgfip-actu",
+              "url": "https://www.impots.gouv.fr/actualite/facturation-electronique",
+              "title": "Facturation électronique (actualité du 28/09/2026)",
+              "publisher": "DGFiP",
+              "language": "fr",
+              "verified_on": "2026-11-04",
+              "official": true
+            },
+            {
+              "id": "lf2024-art91",
+              "url": "https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000048727444",
+              "title": "Loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, article 91",
+              "publisher": "Légifrance (Journal officiel)",
+              "language": "fr",
+              "verified_on": "2026-11-04",
               "official": true
             }
           ]
@@ -359,8 +377,8 @@
             {
               "id": "chorus",
               "url": "https://communaute.chorus-pro.gouv.fr/",
-              "title": "Communaut\u00e9 Chorus Pro",
-              "publisher": "Agence pour l'informatique financi\u00e8re de l'\u00c9tat",
+              "title": "Communauté Chorus Pro",
+              "publisher": "Agence pour l'informatique financière de l'État",
               "language": "fr",
               "verified_on": "2026-07-25",
               "official": true
@@ -372,7 +390,7 @@
           "title": "E-reporting of B2C and cross-border transaction data",
           "scope": "e-reporting",
           "model": "real-time-reporting",
-          "status": "enacted",
+          "status": "in_force",
           "formats": [
             "Structured transaction data submission"
           ],
@@ -382,8 +400,9 @@
               "starts_on": "2026-09-01",
               "obligation": "report",
               "applies_to": "Large enterprises and intermediate-sized enterprises (ETI)",
-              "status": "planned",
-              "previous_starts_on": "2024-07-01"
+              "status": "in_force",
+              "previous_starts_on": "2024-07-01",
+              "source_ref": "lf2024-art91"
             },
             {
               "id": "reporting-sme-micro",
@@ -391,23 +410,33 @@
               "obligation": "report",
               "applies_to": "Small and medium enterprises and micro-enterprises",
               "status": "planned",
-              "previous_starts_on": "2026-01-01"
+              "previous_starts_on": "2026-01-01",
+              "source_ref": "lf2024-art91"
             }
           ],
           "sources": [
             {
               "id": "dgfip-fe",
-              "url": "https://www.impots.gouv.fr/facturation-electronique",
-              "title": "La facturation \u00e9lectronique entre entreprises",
+              "url": "https://www.impots.gouv.fr/professionnel/je-decouvre-la-facturation-electronique",
+              "title": "Je découvre la facturation électronique",
               "publisher": "DGFiP",
               "language": "fr",
-              "verified_on": "2026-07-25",
+              "verified_on": "2026-11-04",
+              "official": true
+            },
+            {
+              "id": "lf2024-art91",
+              "url": "https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000048727444",
+              "title": "Loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, article 91",
+              "publisher": "Légifrance (Journal officiel)",
+              "language": "fr",
+              "verified_on": "2026-11-04",
               "official": true
             }
           ]
         }
       ],
-      "notes": "Seed entry. France runs a Y model: invoices flow between certified partner platforms (PDP), while a separate e-reporting stream covers B2C and cross-border transactions. The 2024 timetable was replaced by the current one in the 2024 finance act, recorded as previous_starts_on."
+      "notes": "Seed entry. France runs a Y model: invoices flow between certified partner platforms (PDP), while a separate e-reporting stream covers B2C and cross-border transactions. The 2024 timetable was replaced by the current one in the 2024 finance act, recorded as previous_starts_on. The first wave (receipt by all, issuing and e-reporting by large enterprises and ETI) went live on 2026-09-01; SMEs and micro-enterprises follow on 2027-09-01."
     },
     {
       "schema_version": 1,
@@ -528,7 +557,7 @@
       "country": "MX",
       "country_name": "Mexico",
       "region": "LATAM",
-      "tax_authority": "Servicio de Administraci\u00f3n Tributaria (SAT)",
+      "tax_authority": "Servicio de Administración Tributaria (SAT)",
       "review_status": "draft",
       "last_reviewed": "2026-07-25",
       "mandates": [
@@ -572,8 +601,8 @@
             {
               "id": "sat-factura",
               "url": "https://www.sat.gob.mx/consultas/factura-electronica",
-              "title": "Factura electr\u00f3nica (CFDI)",
-              "publisher": "Servicio de Administraci\u00f3n Tributaria",
+              "title": "Factura electrónica (CFDI)",
+              "publisher": "Servicio de Administración Tributaria",
               "language": "es",
               "verified_on": "2026-07-25",
               "official": true
@@ -582,20 +611,20 @@
         },
         {
           "id": "payroll-nomina",
-          "title": "CFDI de N\u00f3mina \u2014 payroll receipts as stamped CFDI",
+          "title": "CFDI de Nómina — payroll receipts as stamped CFDI",
           "scope": "b2c",
           "model": "clearance",
           "status": "in_force",
           "network": "PAC network",
           "formats": [
-            "CFDI 4.0 with N\u00f3mina 1.2 complement"
+            "CFDI 4.0 with Nómina 1.2 complement"
           ],
           "phases": [
             {
               "id": "nomina-12",
               "starts_on": "2017-04-01",
               "obligation": "issue",
-              "applies_to": "All employers must stamp payroll receipts with the N\u00f3mina 1.2 complement",
+              "applies_to": "All employers must stamp payroll receipts with the Nómina 1.2 complement",
               "status": "in_force"
             }
           ],
@@ -603,8 +632,8 @@
             {
               "id": "sat-nomina",
               "url": "https://www.sat.gob.mx/consultas/74303/complemento-de-nomina",
-              "title": "Complemento de n\u00f3mina",
-              "publisher": "Servicio de Administraci\u00f3n Tributaria",
+              "title": "Complemento de nómina",
+              "publisher": "Servicio de Administración Tributaria",
               "language": "es",
               "verified_on": "2026-07-25",
               "official": true
@@ -738,13 +767,13 @@
       "country": "PL",
       "country_name": "Poland",
       "region": "EU",
-      "tax_authority": "Ministerstwo Finans\u00f3w / Krajowa Administracja Skarbowa",
+      "tax_authority": "Ministerstwo Finansów / Krajowa Administracja Skarbowa",
       "review_status": "draft",
       "last_reviewed": "2026-07-25",
       "mandates": [
         {
           "id": "b2b-ksef",
-          "title": "KSeF \u2014 Krajowy System e-Faktur mandatory structured invoicing",
+          "title": "KSeF — Krajowy System e-Faktur mandatory structured invoicing",
           "scope": "b2b",
           "model": "clearance",
           "status": "in_force",
@@ -801,7 +830,7 @@
               "id": "mf-ksef",
               "url": "https://www.podatki.gov.pl/ksef/",
               "title": "Krajowy System e-Faktur (KSeF)",
-              "publisher": "Ministerstwo Finans\u00f3w",
+              "publisher": "Ministerstwo Finansów",
               "language": "pl",
               "verified_on": "2026-07-25",
               "official": true
@@ -853,7 +882,7 @@
               "id": "phase2-wave1",
               "starts_on": "2023-01-01",
               "obligation": "report",
-              "applies_to": "Wave 1 \u2014 taxpayers above the first revenue threshold must integrate with FATOORA",
+              "applies_to": "Wave 1 — taxpayers above the first revenue threshold must integrate with FATOORA",
               "threshold": {
                 "metric": "annual_revenue",
                 "operator": "gt",
@@ -867,7 +896,7 @@
               "id": "phase2-wave2",
               "starts_on": "2023-07-01",
               "obligation": "report",
-              "applies_to": "Wave 2 \u2014 taxpayers above the second revenue threshold",
+              "applies_to": "Wave 2 — taxpayers above the second revenue threshold",
               "threshold": {
                 "metric": "annual_revenue",
                 "operator": "gt",
@@ -881,7 +910,7 @@
               "id": "phase2-wave3",
               "starts_on": "2023-10-01",
               "obligation": "report",
-              "applies_to": "Wave 3 \u2014 taxpayers above the third revenue threshold",
+              "applies_to": "Wave 3 — taxpayers above the third revenue threshold",
               "threshold": {
                 "metric": "annual_revenue",
                 "operator": "gt",
@@ -895,7 +924,7 @@
               "id": "phase2-wave4",
               "starts_on": "2023-11-01",
               "obligation": "report",
-              "applies_to": "Wave 4 \u2014 taxpayers above the fourth revenue threshold",
+              "applies_to": "Wave 4 — taxpayers above the fourth revenue threshold",
               "threshold": {
                 "metric": "annual_revenue",
                 "operator": "gt",
@@ -909,7 +938,7 @@
               "id": "phase2-wave5",
               "starts_on": "2023-12-01",
               "obligation": "report",
-              "applies_to": "Wave 5 \u2014 taxpayers above the fifth revenue threshold",
+              "applies_to": "Wave 5 — taxpayers above the fifth revenue threshold",
               "threshold": {
                 "metric": "annual_revenue",
                 "operator": "gt",

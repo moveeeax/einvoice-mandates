@@ -34,8 +34,8 @@ cd einvoice-mandates
 make build          # -> bin/einvoice-mandates
 ```
 
-Requires Go 1.24 or newer. There are no runtime dependencies beyond the Go
-standard library and `gopkg.in/yaml.v3`.
+Requires Go 1.26 or newer. There are no runtime dependencies beyond the Go
+standard library and `go.yaml.in/yaml/v3`.
 
 ## Usage
 
@@ -174,3 +174,8 @@ This is a dataset of what the rules are and when they bite. It is deliberately
 not: legal advice, invoice validation, format schemas (XSD/Schematron), sample
 invoices, or an automated scraper. Every field is entered and checked by a
 human.
+
+## License
+
+[MIT](LICENSE). The licence covers both the code and the dataset in
+`data/countries/`, including the committed release artefacts in `examples/`.
