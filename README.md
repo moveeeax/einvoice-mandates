@@ -174,3 +174,8 @@ This is a dataset of what the rules are and when they bite. It is deliberately
 not: legal advice, invoice validation, format schemas (XSD/Schematron), sample
 invoices, or an automated scraper. Every field is entered and checked by a
 human.
+
+## License
+
+[MIT](LICENSE). The licence covers both the code and the dataset in
+`data/countries/`, including the committed release artefacts in `examples/`.
