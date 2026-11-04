@@ -4,12 +4,14 @@ country_name: France
 region: EU
 tax_authority: Direction générale des Finances publiques (DGFiP)
 review_status: draft
-last_reviewed: 2026-07-25
+last_reviewed: 2026-11-04
 notes: >-
   Seed entry. France runs a Y model: invoices flow between certified partner
   platforms (PDP), while a separate e-reporting stream covers B2C and
   cross-border transactions. The 2024 timetable was replaced by the current one
-  in the 2024 finance act, recorded as previous_starts_on.
+  in the 2024 finance act, recorded as previous_starts_on. The first wave
+  (receipt by all, issuing and e-reporting by large enterprises and ETI) went
+  live on 2026-09-01; SMEs and micro-enterprises follow on 2027-09-01.
 
 mandates:
   - id: b2g-chorus
@@ -43,16 +45,30 @@ mandates:
     title: Domestic B2B e-invoicing via certified partner platforms (PDP)
     scope: b2b
     model: interoperability
-    status: enacted
+    status: in_force
     network: PDP network with a central directory
     formats: [Factur-X, UBL 2.1, UN/CEFACT CII]
     sources:
       - id: dgfip-fe
-        url: https://www.impots.gouv.fr/facturation-electronique
-        title: La facturation électronique entre entreprises
+        url: https://www.impots.gouv.fr/professionnel/je-decouvre-la-facturation-electronique
+        title: Je découvre la facturation électronique
         publisher: DGFiP
         language: fr
-        verified_on: 2026-07-25
+        verified_on: 2026-11-04
+        official: true
+      - id: dgfip-actu
+        url: https://www.impots.gouv.fr/actualite/facturation-electronique
+        title: Facturation électronique (actualité du 28/09/2026)
+        publisher: DGFiP
+        language: fr
+        verified_on: 2026-11-04
+        official: true
+      - id: lf2024-art91
+        url: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000048727444
+        title: Loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, article 91
+        publisher: Légifrance (Journal officiel)
+        language: fr
+        verified_on: 2026-11-04
         official: true
     phases:
       - id: receipt-all
@@ -60,15 +76,15 @@ mandates:
         previous_starts_on: 2024-07-01
         obligation: receive
         applies_to: All established VAT-registered businesses must be able to receive
-        status: planned
-        source_ref: dgfip-fe
+        status: in_force
+        source_ref: dgfip-actu
       - id: issue-large-and-eti
         starts_on: 2026-09-01
         previous_starts_on: 2024-07-01
         obligation: issue
         applies_to: Large enterprises and intermediate-sized enterprises (ETI)
-        status: planned
-        source_ref: dgfip-fe
+        status: in_force
+        source_ref: dgfip-actu
       - id: issue-sme-micro
         starts_on: 2027-09-01
         previous_starts_on: 2026-01-01
@@ -81,15 +97,22 @@ mandates:
     title: E-reporting of B2C and cross-border transaction data
     scope: e-reporting
     model: real-time-reporting
-    status: enacted
+    status: in_force
     formats: [Structured transaction data submission]
     sources:
       - id: dgfip-fe
-        url: https://www.impots.gouv.fr/facturation-electronique
-        title: La facturation électronique entre entreprises
+        url: https://www.impots.gouv.fr/professionnel/je-decouvre-la-facturation-electronique
+        title: Je découvre la facturation électronique
         publisher: DGFiP
         language: fr
-        verified_on: 2026-07-25
+        verified_on: 2026-11-04
+        official: true
+      - id: lf2024-art91
+        url: https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000048727444
+        title: Loi n° 2023-1322 du 29 décembre 2023 de finances pour 2024, article 91
+        publisher: Légifrance (Journal officiel)
+        language: fr
+        verified_on: 2026-11-04
         official: true
     phases:
       - id: reporting-large-and-eti
@@ -97,10 +120,12 @@ mandates:
         previous_starts_on: 2024-07-01
         obligation: report
         applies_to: Large enterprises and intermediate-sized enterprises (ETI)
-        status: planned
+        status: in_force
+        source_ref: lf2024-art91
       - id: reporting-sme-micro
         starts_on: 2027-09-01
         previous_starts_on: 2026-01-01
         obligation: report
         applies_to: Small and medium enterprises and micro-enterprises
         status: planned
+        source_ref: lf2024-art91
