@@ -34,8 +34,8 @@ cd einvoice-mandates
 make build          # -> bin/einvoice-mandates
 ```
 
-Requires Go 1.24 or newer. There are no runtime dependencies beyond the Go
-standard library and `gopkg.in/yaml.v3`.
+Requires Go 1.26 or newer. There are no runtime dependencies beyond the Go
+standard library and `go.yaml.in/yaml/v3`.
 
 ## Usage
 
